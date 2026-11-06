@@ -7,7 +7,7 @@
 <meta name="description" content="A guided dua from authentic sources: praise of Allah, salawat, then asking for all good. Arabic with English, Urdu and Tamil, word by word.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0d1117;--card:#141a22;--card2:#1a212b;--ink:#e9e4d8;--dim:#8d96a3;--gold:#d9b25f;--green:#4fbf8b;--line:#232b36;--gloss:#a9c4b8;--shade:rgba(0,0,0,.6)}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#faf7f0;--card:#fff;--card2:#f3eee2;--ink:#1f2328;--dim:#6a7380;--gold:#9a6b12;--green:#1f7a4d;--line:#e6dfd0;--gloss:#3f6b58;--shade:rgba(30,25,15,.35)}}
@@ -19,6 +19,18 @@ body{display:flex;flex-direction:column;min-height:100vh}
 button{font-family:inherit;color:inherit}
 .lang-u{font-family:"Noto Nastaliq Urdu",serif;direction:rtl}
 .lang-t{font-family:"Noto Sans Tamil",Inter,sans-serif}
+.lang-a{font-family:"Noto Naskh Arabic",Amiri,serif;direction:rtl}
+.stage.lang-a{letter-spacing:0;text-transform:none;font-size:15px}
+.title.lang-a{font-size:20px}
+.why.lang-a{font-size:16px;line-height:2}
+.note.lang-a{font-size:18px;line-height:2.1}
+.panel h2.lang-a{font-size:24px}
+.panel h3.lang-a{letter-spacing:0;text-transform:none;font-size:15px}
+.opt .big.lang-a{font-size:21px}
+.opt.mode .lang-a.big{font-size:17px}
+.opt.mode .lang-a.small{font-size:14px}
+.toc .lang-a{font-size:15.5px}
+.opts.four{grid-template-columns:repeat(4,1fr)}
 
 header{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
 .brand{font-weight:600;color:var(--gold);letter-spacing:.02em;white-space:nowrap}
@@ -97,12 +109,12 @@ footer button:hover:not(:disabled),.count button:hover{border-color:var(--gold)}
 .toast.show{opacity:1}
 header{min-width:0}.pill{min-width:0}
 html,body{overflow-x:hidden}
-@media (max-width:640px){.pill{max-width:calc(100vw - 120px)}.brand small{display:none}header{padding:10px 12px}.hint{display:none}footer{padding:10px 12px}.opts.three{grid-template-columns:1fr}.opt .big{font-size:18px}.pill{font-size:13px;padding:7px 11px}}
+@media (max-width:640px){.pill{max-width:calc(100vw - 120px)}.brand small{display:none}header{padding:10px 12px}.hint{display:none}footer{padding:10px 12px}.opts.four{grid-template-columns:1fr 1fr}.opt .big{font-size:18px}.pill{font-size:13px;padding:7px 11px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand">Dua Mode <small id="stepNo"></small></div>
+  <div class="brand">Dua Mode <small id="stepNo" dir="ltr"></small></div>
   <button class="pill" id="openSettings" aria-label="Language and reading settings"><span>🌐</span><span class="lbl" id="pillLbl"></span><span aria-hidden="true">▾</span></button>
 </header>
 <div class="bar"><i id="prog"></i></div>
@@ -117,7 +129,9 @@ const LANGS = [
   { k: "e", native: "English", en: "English" },
   { k: "u", native: "اردو", en: "Urdu" },
   { k: "t", native: "தமிழ்", en: "Tamil" },
+  { k: "a", native: "العربية", en: "Arabic" },
 ];
+const ALL = ["e","u","t","a"];
 const MODES = [
   { k: "tr", ico: "📖" }, { k: "words", ico: "🔤" }, { k: "arabic", ico: "۞" },
 ];
@@ -140,32 +154,42 @@ const UI = {
        hint: "", lang: "மொழி", how: "எப்படிப் படிக்க விரும்புகிறீர்கள்?", contents: "உள்ளடக்கம்",
        start: "தொடங்கு", done: "சரி", theme: "ஒளி / இருள்", welcome: "அஸ்ஸலாமு அலைக்கும்",
        welcomeSub: "குர்ஆன் மற்றும் ஆதாரப்பூர்வமான ஹதீஸ்களிலிருந்து ஒரு வழிகாட்டும் துஆ: அல்லாஹ்வைப் புகழ்ந்து, நபி (ஸல்) மீது ஸலவாத் சொல்லி, பின்னர் கேளுங்கள்." },
+  a: { tr: "النص مع الفضل", words: "النص مع الفضل", arabic: "النص فقط",
+       trD: "نص الدعاء مع فضله ومصدره", wordsD: "", arabicD: "نص الدعاء بخط كبير للتلاوة",
+       next: "التالي ←", back: "→ السابق", ameen: "آمين", count: "عُدّ", share: "مشاركة الرابط", copied: "تم نسخ الرابط",
+       hint: "", lang: "اللغة", how: "كيف تحب أن تقرأ؟", contents: "الفهرس",
+       start: "ابدأ", done: "تم", theme: "فاتح / داكن", welcome: "السلام عليكم ورحمة الله",
+       welcomeSub: "أدعية من القرآن والسنة الصحيحة على الترتيب الذي علّمه النبي ﷺ: حمد الله والثناء عليه، ثم الصلاة على النبي ﷺ، ثم المسألة." },
 };
-const CHOOSE_ALL = "Choose your language · اپنی زبان منتخب کریں · உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்";
+const CHOOSE_ALL = "Choose your language · اپنی زبان منتخب کریں · உங்கள் மொழியைத் தேர்ந்தெடுக்கவும் · اختر لغتك";
 
 const store = { get(k){ try { return localStorage.getItem("duamode." + k); } catch(e){ return null; } },
                 set(k,v){ try { localStorage.setItem("duamode." + k, v); } catch(e){} } };
 const qs = new URLSearchParams(location.search);
 const pick = (v, ok, d) => ok.includes(v) ? v : d;
 const firstVisit = !qs.get("lang") && !store.get("lang");
-let lang = pick(qs.get("lang") || store.get("lang"), ["e","u","t"], "e");
+let lang = pick(qs.get("lang") || store.get("lang"), ALL, "e");
 let view = pick(qs.get("view") || store.get("view"), ["tr","words","arabic"], "tr");
 let i = Math.max(0, Math.min(DUAS.length - 1, (parseInt(qs.get("step"), 10) || 1) - 1));
 let n = 0, welcome = false;
 const theme = store.get("theme"); if (theme) document.documentElement.dataset.theme = theme;
 
 const $ = id => document.getElementById(id);
-const cls = l => l === "u" ? "lang-u" : l === "t" ? "lang-t" : "";
+const cls = l => ({ u: "lang-u", t: "lang-t", a: "lang-a" }[l] || "");
+const rtl = () => lang === "u" || lang === "a";
+// Arabic readers don't need a word-by-word gloss; show the text with its virtue instead.
+const eff = () => (lang === "a" && view === "words") ? "tr" : view;
 const esc = s => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c]));
-const srcText = d => d.src.map(([b, r]) => `${BOOKS[b][lang]} ${r}`).join(lang === "u" ? "، " : " · ");
+const srcText = d => d.src.map(([b, r]) => `${BOOKS[b][lang]} ${r}`).join(rtl() ? "، " : " · ");
 const native = k => LANGS.find(l => l.k === k).native;
 
 function render() {
-  const d = DUAS[i], L = UI[lang], c = cls(lang); n = 0;
-  document.documentElement.lang = { e: "en", u: "ur", t: "ta" }[lang];
+  const d = DUAS[i], L = UI[lang], c = cls(lang), v = eff(); n = 0;
+  document.documentElement.lang = { e: "en", u: "ur", t: "ta", a: "ar" }[lang];
+  document.body.dir = lang === "a" ? "rtl" : "ltr";
   $("stepNo").textContent = `${i + 1} / ${DUAS.length}`;
   $("prog").style.width = ((i + 1) / DUAS.length * 100) + "%";
-  $("pillLbl").textContent = `${native(lang)} · ${L[view]}`;
+  $("pillLbl").textContent = `${native(lang)} · ${L[v]}`;
   $("pillLbl").className = "lbl " + c;
   $("hint").textContent = L.hint;
   $("prev").textContent = L.back; $("prev").disabled = i === 0; $("prev").className = c;
@@ -173,24 +197,24 @@ function render() {
 
   let h = `<div class="stage ${c}">${STAGES[d.stage][lang]}</div><div class="title ${c}">${d.title[lang]}</div>`;
   if (d.list) {
-    h += `<div class="note ${c}" dir="${lang === "u" ? "rtl" : "ltr"}">` + (d.intro ? `<p>${d.intro[lang]}</p>` : "") +
+    h += `<div class="note ${c}" dir="${rtl() ? "rtl" : "ltr"}">` + (d.intro ? `<p>${d.intro[lang]}</p>` : "") +
          `<ul>${d.list[lang].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
   }
   if (d.words) {
-    if (view === "words") {
+    if (v === "words") {
       h += `<div class="ww">${d.words.map(([a, g]) => `<span class="w"><span class="a">${a}</span><span class="g ${c}">${esc(g[lang])}</span></span>`).join("")}</div>`;
     } else {
       h += `<div class="ar">${d.words.map(w => w[0]).join(" ")}</div>`;
     }
-    if (view !== "arabic") {
-      h += `<div class="tr ${c}">${esc(d.tr[lang])}</div>`;
-      if (d.why) h += `<div class="why ${c}">${esc(d.why[lang])}</div>`;
+    if (v !== "arabic") {
+      if (d.tr[lang]) h += `<div class="tr ${c}">${esc(d.tr[lang])}</div>`;
+      if (d.why && d.why[lang]) h += `<div class="why ${c}">${esc(d.why[lang])}</div>`;
     }
     h += `<div class="src ${c}">${srcText(d)}</div>`;
   }
-  if (d.reps) h += `<div class="count"><button id="cnt" class="${c}">${L.count}</button><span id="cv">0 / ${d.reps}</span></div>`;
+  if (d.reps) h += `<div class="count"><button id="cnt" class="${c}">${L.count}</button><span id="cv" dir="ltr">0 / ${d.reps}</span></div>`;
   const card = $("card");
-  card.className = "card" + (view === "arabic" ? " arabic-only" : "");
+  card.className = "card" + (v === "arabic" ? " arabic-only" : "");
   card.innerHTML = h;
   if (d.reps) $("cnt").onclick = count;
   history.replaceState(null, "", `?lang=${lang}&view=${view}&step=${i + 1}`);
@@ -202,14 +226,14 @@ function renderPanel() {
   let h = "";
   if (welcome) {
     h += `<h2 class="${c}">${L.welcome}</h2><div class="sub ${c}">${L.welcomeSub}</div>`;
-    h += `<h3>${CHOOSE_ALL.split(" · ").map((s, k) => `<span class="${cls(["e","u","t"][k])}">${s}</span>`).join(" · ")}</h3>`;
+    h += `<h3>${CHOOSE_ALL.split(" · ").map((s, k) => `<span class="${cls(ALL[k])}">${s}</span>`).join(" · ")}</h3>`;
   } else {
     h += `<h3 class="${c}">${L.lang}</h3>`;
   }
-  h += `<div class="opts three">${LANGS.map(l => `<button class="opt ${l.k === lang ? "on" : ""}" data-lang="${l.k}">
+  h += `<div class="opts four">${LANGS.map(l => `<button class="opt ${l.k === lang ? "on" : ""}" data-lang="${l.k}">
           <span class="big ${cls(l.k)}">${l.native}</span><span class="small">${l.en}</span></button>`).join("")}</div>`;
   h += `<h3 class="${c}">${L.how}</h3>`;
-  h += `<div class="opts">${MODES.map(m => `<button class="opt mode ${m.k === view ? "on" : ""}" data-view="${m.k}">
+  h += `<div class="opts">${MODES.filter(m => !(lang === "a" && m.k === "words")).map(m => `<button class="opt mode ${m.k === eff() ? "on" : ""}" data-view="${m.k}">
           <span class="ico">${m.ico}</span><span><span class="big ${c}">${L[m.k]}</span><span class="small ${c}">${L[m.k + "D"]}</span></span></button>`).join("")}</div>`;
   if (!welcome) {
     h += `<h3 class="${c}">${L.contents}</h3><div class="toc">${DUAS.map((d, k) =>
@@ -218,7 +242,7 @@ function renderPanel() {
   }
   h += `<div class="row"><button class="primary ${c}" id="closeBtn">${welcome ? L.start : L.done}</button></div>`;
   $("panel").innerHTML = h;
-  $("panel").dir = lang === "u" ? "rtl" : "ltr";
+  $("panel").dir = rtl() ? "rtl" : "ltr";
   $("panel").querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { lang = b.dataset.lang; store.set("lang", lang); render(); });
   $("panel").querySelectorAll("[data-view]").forEach(b => b.onclick = () => { view = b.dataset.view; store.set("view", view); render(); });
   $("panel").querySelectorAll("[data-step]").forEach(b => b.onclick = () => { i = +b.dataset.step; closeSheet(); render(); });

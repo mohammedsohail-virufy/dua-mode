@@ -19,7 +19,7 @@ Every dua shows its source.
 
 ## Languages and modes
 
-- **Languages:** English, Urdu (اردو), Tamil (தமிழ்)
+- **Languages:** English, Urdu (اردو), Tamil (தமிழ்), Arabic (العربية, full Arabic interface)
 - **Translation:** Arabic with the full meaning below
 - **Word by word:** the meaning under each Arabic phrase
 - **Arabic only:** large Arabic text for reciting
@@ -28,6 +28,7 @@ Links remember the language and mode, so you can share a ready-set page:
 
 - Tamil, word by word: `?lang=t&view=words`
 - Urdu translation: `?lang=u&view=tr`
+- Full Arabic: `?lang=a`
 - Arabic only: `?view=arabic`
 
 Keys: Space or → for next, ← for back, C to count. On a phone, swipe.
