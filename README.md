@@ -35,6 +35,6 @@ Keys: Space or → for next, ← for back, C to count. On a phone, swipe.
 
 ## Corrections
 
-The translations and word-by-word meanings are being reviewed. If you find a mistake in the Arabic, a translation or a reference, please [open an issue](../../issues) or send a pull request. All content is in [`duas.js`](duas.js).
+The Arabic text and hadith references follow *al-Dhikr wa al-Du'a fi Daw' al-Kitab wa al-Sunnah* (الذكر والدعاء في ضوء الكتاب والسنة) by Shaykh 'Abd al-Razzaq ibn 'Abd al-Muhsin al-Badr; each dua shows the page. The English, Urdu and Tamil translations are being reviewed. If you find a mistake in the Arabic, a translation or a reference, please [open an issue](../../issues) or send a pull request. All content is in [`duas.js`](duas.js).
 
 May Allah accept from us and from you.
